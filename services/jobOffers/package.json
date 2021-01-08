@@ -1,0 +1,20 @@
+{
+  "name": "job-offers-service",
+  "version": "1.0.0",
+  "description": "AWS Serverless Service that manages job offers",
+  "author": "Atlant Agency",
+  "license": "ISC",
+  "private": true,
+  "scripts": {
+    "deploy": "sls deploy",
+    "build": "sls package",
+    "start": "sls offline"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "serverless": "^2.15.0",
+    "serverless-bundle": "^4.1.0",
+    "serverless-offline": "^6.8.0",
+    "yaml-boost": "^1.10.2"
+  }
+}

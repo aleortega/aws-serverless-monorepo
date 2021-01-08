@@ -1,0 +1,67 @@
+service: tats-recruiter-service
+
+plugins: 
+  - serverless-offline
+  - serverless-bundle
+
+frameworkVersion: '2'
+
+package:
+  individually: true
+
+custom:
+  apiVersion: 'v1'
+  bundle:
+    aliases:
+      - infrastructure: ./../../libs/infrastructure
+      - models: ./../../libs/models
+      - recruiterStorage: ./src/interfaces/storage
+      - jobOfferStorage: ./../jobOffers/src/interfaces/storage
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'ap-south-1'}
+  apiGateway:
+    restApiRootResourceId: ${${file(./settings/${opt:stage, self:provider.stage, 'dev'}.settings.json):REST_API_ROOT_RSS_ID}}
+    restApiId: ${${file(./settings/${opt:stage, self:provider.stage, 'dev'}.settings.json):REST_API_ID}}
+    restApiResources:
+      /v1: ${${file(./settings/${opt:stage, self:provider.stage, 'dev'}.settings.json):REST_API_V1_RSS_ID}}
+  runtime: nodejs12.x
+  deploymentBucket:
+    name: tats-webapi-deploys
+    maxPreviousDeploymentArtifacts: 5
+    blockPublicAccess: true
+  environment:
+    DATABASE_CONNECTION_URI: ${${file(./settings/${opt:stage, self:provider.stage, 'dev'}.settings.json):DATABASE_CONNECTION_URI}}
+
+functions:
+  recruiterCreator:
+    handler: src/handlers/recruiterCreator.handle
+    events:
+      - sqs:
+          arn: ${file(./settings/${opt:stage, self:provider.stage, 'dev'}.settings.json):SQS_RECRUITER_SAVER_ARN}
+          batchSize: 1
+  
+  recruiterRetriever:
+    handler: src/handlers/recruiterRetriever.handle
+    events:
+      - http:
+          path: ${self:custom.apiVersion}/recruiters/{recruiterEmail}
+          method: GET
+          cors: true
+
+  associatedJobOffersRetriever:
+    handler: src/handlers/associatedJobOffersRetriever.handle
+    events:
+      - http:
+          path: ${self:custom.apiVersion}/recruiters/{recruiterEmail}/joboffers
+          method: GET
+          cors: true
+
+  jobOfferLinker:
+    handler: src/handlers/jobOfferLinker.handle
+    events:
+      - sqs:
+          arn: ${file(./settings/${opt:stage, self:provider.stage, 'dev'}.settings.json):SQS_JOB_OFFER_LINKER_ARN}
+          batchSize: 1

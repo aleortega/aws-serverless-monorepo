@@ -1,0 +1,63 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Recruiter Service",
+      "program": "${workspaceRoot}/services/recruiters/node_modules/serverless/bin/serverless",
+      "args": [
+        "offline",
+        "--noTimeout",
+        "--dontPrintOutput",
+        "--stage=development",
+        "-P",
+        "3000"
+      ],
+      "sourceMaps": true,
+      "runtimeArgs": ["--lazy"],
+      "outFiles": ["${workspaceFolder}/services/recruiters/.webpack/**/*.js"],
+      "protocol": "inspector",
+      "runtimeExecutable": "node",
+      "env": {
+        // Here we set some environment vars that should be set locally.
+        // They can and will overwrite the ones coming from your serverless.yml
+      },
+      "windows": {
+        "program": "${workspaceRoot}\\services\\recruiters\\node_modules\\serverless\\bin\\serverless"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Saving",
+      "program": "${workspaceRoot}/node_modules/serverless/bin/serverless",
+      "args": [
+        "invoke",
+        "local",
+        "--function",
+        "recruiterSaver",
+        "--path",
+        "${workspaceRoot}\\inputs\\recruiter-saver-input.json",
+        "--stage=development",
+        "--log",
+        "--skipCacheInvalidation"
+      ],
+      "sourceMaps": true,
+      "runtimeArgs": ["--lazy"],
+      "outFiles": ["${workspaceFolder}/settings/webpack/.webpack/**/*.js"],
+      "protocol": "inspector",
+      "runtimeExecutable": "node",
+      "env": {
+        // Here we set some environment vars that should be set locally.
+        // They can and will overwrite the ones coming from your serverless.yml
+      },
+      "windows": {
+        "program": "${workspaceRoot}\\node_modules\\serverless\\bin\\serverless"
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "REST_API_ID": "ssm:/jobs/auth-service/development/api-gateway-id~true",
+  "REST_API_ROOT_RSS_ID": "ssm:/jobs/auth-service/development/api-gateway-root-rss-id~true",
+  "REST_API_V1_RSS_ID": "ssm:/jobs/auth-service/development/api-gateway-v1-rss-id~true",
+  "USER_SIGNED_UP_TOPIC_ARN": "arn:aws:sns:ap-south-1:531457853826:tats-user-signed-up-dev",
+  "COGNITO_CLIENT_ID": "ssm:/jobs/auth-service/development/cognito-client-id~true",
+  "COGNITO_USER_POOL_ID": "ssm:/jobs/auth-service/development/cognito-user-pool-id~true"
+}

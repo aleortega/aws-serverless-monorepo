@@ -1,0 +1,21 @@
+{
+  "name": "recruiters-service",
+  "version": "1.0.0",
+  "description": "AWS Serverless Service that manages recruiters",
+  "author": "Atlant Agency",
+  "license": "ISC",
+  "private": true,
+  "scripts": {
+    "deploy": "sls deploy",
+    "build": "sls package",
+    "start": "sls offline",
+    "invoke:recruiterCreator": "sls invoke local --function recruiterCreator --path ./inputs/recruiter-creator-input.json",
+    "invoke:jobOfferLinker": "sls invoke local --function jobOfferLinker --path ./inputs/job-offer-linker-input.json"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "serverless": "^2.15.0",
+    "serverless-bundle": "^4.1.0",
+    "serverless-offline": "^6.8.0"
+  }
+}

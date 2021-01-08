@@ -1,0 +1,24 @@
+{
+    "Records": [
+      {
+        "messageId": "c88d1767-6515-4005-8b23-f604dafafffd",
+        "receiptHandle": "AQEB64Fbt2Yb5LG7P0ZnuYtf1lPjvFGvsYeuoxTq2xlyhd9VKMIKAEg8HDwlfWvH0JR/cXXoczSoxE/RMxYz8tGfTG9sIpIkBj4j2gZHlqPBGb581lmcmNnD6tb/3EaNTZfLycM+7rSB0Q3vQl6uxPtNc/ccyGca1piF+R8s3tGYlKGOjIiPnsUfk5MbxnAtypcLQTv8QNUdqMKxKvsmRqh6M9sCpecXKzD82/yb1PkDOrNQpeT7dsw8UC7xEokrkP8YPYMdKCgCSXQe+MSW5g2nIJa2CNqXZ8VcMntnQGDdXpQ=",
+        "body": "{\r\n  \"Type\" : \"Notification\",\r\n  \"MessageId\" : \"ad92be78-f667-517d-b728-e6301146d132\",\r\n  \"SequenceNumber\" : \"10000000000000000102\",\r\n  \"TopicArn\" : \"arn:aws:sns:ap-south-1:531457853826:ats-user-signed-up-dev.fifo\",\r\n  \"Message\" : \"{\\\"ownerId\\\":\\\"5fd0347c91941d4a6cbde356\\\",\\\"jobOfferId\\\":\\\"5fd03cff035b6603c455f00c\\\"}\",\r\n  \"Timestamp\" : \"2020-12-08T02:28:49.783Z\",\r\n  \"UnsubscribeURL\" : \"https:\/\/sns.ap-south-1.amazonaws.com\/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:ap-south-1:531457853826:ats-user-signed-up-dev.fifo:0cdcf8d1-b6d9-40b0-9741-159c6f7a17c4\",\r\n  \"MessageAttributes\" : {\r\n    \"ProfileType\" : {\"Type\":\"String\",\"Value\":\"RECRUITER\"}\r\n  }\r\n}",
+        "attributes": {
+          "ApproximateReceiveCount": "1",
+          "SentTimestamp": "1607394530042",
+          "SequenceNumber": "18858237073400303872",
+          "MessageGroupId": "SignUp",
+          "SenderId": "AIDARXSIOE6S5JRGNYIQ6",
+          "MessageDeduplicationId": "",
+          "ApproximateFirstReceiveTimestamp": "1607394530042"
+        },
+        "messageAttributes": {},
+        "md5OfBody": "5562282d5f911bc04d8dd8c59c225145",
+        "eventSource": "aws:sqs",
+        "eventSourceARN": "arn:aws:sqs:ap-south-1:531457853826:ats-recruiter-signed-up-dev.fifo",
+        "awsRegion": "ap-south-1"
+      }
+    ]
+  }
+  

@@ -1,0 +1,26 @@
+{
+  "name": "tats-webapi",
+  "version": "1.0.0",
+  "description": "AWS Serverless mono-repo for Talent ATS WebAPI",
+  "main": "index.js",
+  "author": "Atlant Agency",
+  "license": "ISC",
+  "private": true,
+  "scripts": {
+    "test": "echo test",
+    "deploy": "./scripts/deploy.sh"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "husky": "^4.3.5",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "serverless": "^2.15.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.806.0",
+    "mongoose": "^5.11.5",
+    "pino": "^6.7.0"
+  }
+}

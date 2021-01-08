@@ -1,0 +1,69 @@
+service: tats-auth-service
+
+plugins: 
+  - serverless-offline
+  - serverless-bundle
+
+frameworkVersion: '2'
+
+package:
+  individually: true
+
+custom:
+  apiVersion: 'v1'
+  bundle:
+    aliases:
+      - infrastructure: ./../../libs/infrastructure
+      - models: ./../../libs/models
+      - commonConstants: ./../../libs/constants
+      - authenticator: ./src/interfaces/authenticator
+      - customErrorParser: ./src/services/errorParser
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'ap-south-1'}
+  apiGateway:
+    restApiRootResourceId: ${${file(./settings/${opt:stage, self:provider.stage, 'dev'}.settings.json):REST_API_ROOT_RSS_ID}}
+    restApiId: ${${file(./settings/${opt:stage, self:provider.stage, 'dev'}.settings.json):REST_API_ID}}
+    restApiResources:
+      /v1: ${${file(./settings/${opt:stage, self:provider.stage, 'dev'}.settings.json):REST_API_V1_RSS_ID}}
+  runtime: nodejs12.x
+  deploymentBucket:
+    name: tats-webapi-deploys
+    maxPreviousDeploymentArtifacts: 5
+    blockPublicAccess: true
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action: SNS:Publish
+      Resource: ${file(./settings/${opt:stage, self:provider.stage, 'dev'}.settings.json):USER_SIGNED_UP_TOPIC_ARN}
+  environment:
+    AWS_ENVIRONMENT_REGION: ap-south-1
+    USER_SIGNED_UP_TOPIC_ARN: ${file(./settings/${opt:stage, self:provider.stage, 'dev'}.settings.json):USER_SIGNED_UP_TOPIC_ARN}
+    COGNITO_CLIENT_ID: ${${file(./settings/${opt:stage, self:provider.stage, 'dev'}.settings.json):COGNITO_CLIENT_ID}}
+    COGNITO_USER_POOL_ID: ${${file(./settings/${opt:stage, self:provider.stage, 'dev'}.settings.json):COGNITO_USER_POOL_ID}}
+
+functions:
+  userAuthenticator:
+    handler: src/handlers/userAuthenticator.handle
+    events:
+      - http:
+          path: ${self:custom.apiVersion}/signin
+          method: POST
+          cors: true
+
+  userRegistrar:
+    handler: src/handlers/userRegistrar.handle
+    events:
+      - http:
+          path: ${self:custom.apiVersion}/signup
+          method: POST
+          cors: true
+
+  sessionRenewer:
+    handler: src/handlers/sessionRenewer.handle
+    events:
+      - http:
+          path: ${self:custom.apiVersion}/renewSession
+          method: POST
+          cors: true

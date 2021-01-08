@@ -1,0 +1,8 @@
+{
+  "REST_API_ID": "ssm:/jobs/auth-service/development/api-gateway-id~true",
+  "REST_API_ROOT_RSS_ID": "ssm:/jobs/auth-service/development/api-gateway-root-rss-id~true",
+  "REST_API_V1_RSS_ID": "ssm:/jobs/auth-service/development/api-gateway-v1-rss-id~true",
+  "DATABASE_CONNECTION_URI": "ssm:/jobs/auth-service/development/database-connection-uri~true",
+  "JOB_OFFER_CREATED_TOPIC_ARN": "arn:aws:sns:ap-south-1:531457853826:tats-job-offer-created-dev",
+  "DEFAULT_LIMIT_PAGINATION": 1
+}
